@@ -1,10 +1,8 @@
 # 2048 on EKS
 
-## 
-
-* AWS CLI configured
-* `kubectl` installed
-* `eksctl` installed
+* AWS CLI 
+* `kubectl` 
+* `eksctl` 
 * AWS IAM user with sufficient permissions
 
 ---
