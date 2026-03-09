@@ -1,6 +1,6 @@
-# Deploying the 2048 Game on Amazon EKS (CLI Workflow)
+# 2048 on EKS
 
-## Prerequisites
+## 
 
 * AWS CLI configured
 * `kubectl` installed
