@@ -5,7 +5,6 @@
 * AWS CLI configured
 * `kubectl` installed
 * `eksctl` installed
-* Docker installed (optional)
 * AWS IAM user with sufficient permissions
 
 ---
@@ -41,31 +40,6 @@ Create a file:
 ```
 2048-deployment.yaml
 ```
-
-Contents:
-
-```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: deployment-2048
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: game-2048
-  template:
-    metadata:
-      labels:
-        app: game-2048
-    spec:
-      containers:
-      - name: game-2048
-        image: public.ecr.aws/l6m2t8p7/docker-2048:latest
-        ports:
-        - containerPort: 80
-```
-
 ---
 
 # 5. Deploy Application
@@ -91,24 +65,6 @@ Create file:
 ```
 mygame-svc.yaml
 ```
-
-Contents:
-
-```
-apiVersion: v1
-kind: Service
-metadata:
-  name: mygame-svc
-spec:
-  selector:
-    app: game-2048
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-  type: LoadBalancer
-```
-
 ---
 
 # 8. Create LoadBalancer Service
@@ -141,80 +97,3 @@ kubectl get endpoints
 http://<EXTERNAL-LOADBALANCER-DNS>
 ```
 
-Example:
-
-```
-http://ac14d12d01bbf488b92c605b9d86f3e7-1479432683.us-east-2.elb.amazonaws.com
-```
-
----
-
-# 12. Check All Cluster Resources
-
-```
-kubectl get all
-```
-
----
-
-# 13. Check Pods in All Namespaces
-
-```
-kubectl get pods -A
-```
-
----
-
-# 14. Check Pod Labels
-
-```
-kubectl get pods --show-labels
-```
-
----
-
-# 15. Describe Pod for Debugging
-
-```
-kubectl describe pod <pod-name>
-```
-
----
-
-# 16. View Pod Logs
-
-```
-kubectl logs <pod-name>
-```
-
----
-
-# 17. Check Pod Placement
-
-```
-kubectl get pods -o wide
-```
-
----
-
-# 18. Delete Deployment
-
-```
-kubectl delete deployment deployment-2048
-```
-
----
-
-# 19. Delete Service
-
-```
-kubectl delete svc mygame-svc
-```
-
----
-
-# 20. Delete EKS Cluster
-
-```
-eksctl delete cluster --name demo-cluster --region us-east-2
-```
